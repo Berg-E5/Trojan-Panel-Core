@@ -194,7 +194,6 @@ func (x *xrayApi) AddUser(dto dto.XrayAddUserDto) error {
 						Level: 0,
 						Account: serial.ToTypedMessage(&trojan.Account{
 							Password: dto.Password,
-							Flow:     nodeConfig.XrayFlow,
 						}),
 					},
 				}),
@@ -225,7 +224,6 @@ func (x *xrayApi) AddUser(dto dto.XrayAddUserDto) error {
 						Level: 0,
 						Account: serial.ToTypedMessage(&vmess.Account{
 							Id:      util.GenerateUUID(dto.Password),
-							AlterId: 0,
 						}),
 					},
 				}),
