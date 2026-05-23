@@ -48,4 +48,3 @@ jobs:
             ghcr.io/berg-e5/trojan-panel-core:latest
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
-
