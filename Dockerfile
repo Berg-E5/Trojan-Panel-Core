@@ -1,17 +1,10 @@
 FROM alpine:3.15
 WORKDIR /tpdata/trojan-panel-core/
-ENV TZ=Asia/Shanghai \
-    GIN_MODE=release
-RUN apk add --no-cache bash tzdata ca-certificates \
-    && rm -rf /var/cache/apk/*
+ENV TZ=Asia/Shanghai GIN_MODE=release
+RUN apk add --no-cache bash tzdata ca-certificates && rm -rf /var/cache/apk/*
 COPY build/trojan-panel-core /tpdata/trojan-panel-core/
-COPY bin/xray/config/ /tpdata/trojan-panel-core/config/xray/ || true
-COPY bin/trojango/config/ /tpdata/trojan-panel-core/config/trojango/ || true
-COPY bin/naiveproxy/config/ /tpdata/trojan-panel-core/config/naiveproxy/ || true
-COPY bin/hysteria/config/ /tpdata/trojan-panel-core/config/hysteria/ || true
-COPY bin/hysteria2/config/ /tpdata/trojan-panel-core/config/hysteria2/ || true
-ENTRYPOINT chmod 777 /tpdata/trojan-panel-core/trojan-panel-core \
-    && /tpdata/trojan-panel-core/trojan-panel-core \
+ENTRYPOINT chmod 777 /tpdata/trojan-panel-core/trojan-panel-core && \
+    /tpdata/trojan-panel-core/trojan-panel-core \
     -host=${mariadb_ip:-127.0.0.1} \
     -port=${mariadb_port:-9507} \
     -user=${mariadb_user:-root} \
